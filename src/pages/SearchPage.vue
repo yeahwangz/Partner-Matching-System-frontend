@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {ref} from "vue";
+import {useRouter} from "vue-router";
 
 //搜索框
 const value = ref('');
@@ -17,6 +18,8 @@ const onSearch = (val: string) => {
     items.value=JSON.parse(JSON.stringify(midItems))
   }
 }
+const onClickButton = () => onSearch(value.value)
+
 const onCancel = () => activeIds.value = []
 
 //多选
@@ -50,19 +53,32 @@ const doClose = (tag: string) => {
   })
 }
 
+/*路由到匹配结果页*/
+const router = useRouter()
+const onMatch = () => {
+  router.push({
+    path: '/search/result',
+    query: {
+      tags: activeIds.value,
+    }
+  })
+}
+
 </script>
 
 <template>
-<!--  搜索框-->
-  <form action="/">
-    <van-search
-        v-model="value"
-        show-action
-        placeholder="请输入搜索关键词"
-        @search="onSearch"
-        @cancel="onCancel"
-    />
-  </form>
+  <!--  搜索框-->
+  <van-search
+      v-model="value"
+      show-action
+      label="标签搜索"
+      placeholder="请输入搜索关键词"
+      @search="onSearch"
+  >
+    <template #action>
+      <div @click="onClickButton">搜索</div>
+    </template>
+  </van-search>
 
   <!-- 已选择可关闭标签 -->
   <van-row gutter="16" style="padding: 0 16px">
@@ -72,6 +88,16 @@ const doClose = (tag: string) => {
       </van-tag>
     </van-col>
   </van-row>
+
+  <br>
+
+<!--  标签重置按钮-->
+  <van-button plain hairline type="primary" @click="onCancel">重置标签</van-button>
+
+  &nbsp;&nbsp;&nbsp;
+
+  <!--  提交标签进行匹配按钮-->
+  <van-button plain hairline type="primary" @click="onMatch">开始匹配</van-button>
 
 <!--  分割线-->
   <van-divider />
