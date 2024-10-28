@@ -1,48 +1,57 @@
 <script setup lang="ts">
 
 import {useRoute} from "vue-router";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
+import myAxios from "../config/AxiosConfig.ts";
+import qs from 'qs';
+import {UserType} from "../models/UserType";
 
 const route = useRoute()
 const {tags} = route.query
-const mockUser = {
-  id: 12345,
-  userName: '01geek',
-  userAccount: '12314',
-  profile: '一名精神小伙，目前还有头发，谢谢大家，阿爸爸阿爸爸阿巴阿巴阿巴',
-  avatarUrl: 'src/assets/01geek.jpg',
-  gender: 0,
-  phone: '13113113111',
-  email: '592342843721987@xzcxzczxcz.com',
-  userRole: 0,
-  planetCode: '1234',
-  tags: tags,
-  createTime: new Date(),
-}
 
-const userList = ref([mockUser])
-/*const end = () => {
-console.log(route.query.tags)
-}*/
+const userList = ref<UserType[]>([])
 
+onMounted(async () => {
+      try {
+        const response = await myAxios.get(`/user/search/tags`, {
+          params: {
+            tagsList: tags
+          },
+          paramsSerializer: params => {
+            return qs.stringify(params, {indices: false})
+          }
+        })
+        console.log('/user/search/tags',response)
+        console.log('here!.........',response.data)
+        userList.value = response.data.data
+      } catch (error) {
+        console.error('/user/search/tags', error)
+      }
+    }
+)
 
 </script>
 
 <template>
-<!--  <van-button plain hairline type="primary" @click="end">get</van-button>-->
-  <van-card
-      v-for="user in userList"
-      :desc="user.profile"
-      :title="user.userName"
-      :thumb="user.avatarUrl"
-  >
-    <template #tags>
-      <van-tag plain type="danger" v-for="tag in user.tags" style="margin-right: 8px;margin-top: 8px">
-        {{tag}}
-      </van-tag>
-    </template>
-  </van-card>
-
+  <div v-if="userList.length > 0">
+    <van-card
+        v-for="user in userList"
+        :desc="user.profile || '此人还没有填写个人简介'"
+        :title="user.userName"
+        :thumb="user.avatarUrl || 'src/assets/01geek.jpg'"
+    >
+      <template #tags>
+        <van-tag plain type="danger"
+                 v-for="tag in (user.tags ? JSON.parse(user.tags) : [])"
+                 style="margin-right: 8px;margin-top: 8px">
+          {{tag}}
+        </van-tag>
+      </template>
+    </van-card>
+  </div>
+  <div v-else>
+    匹配不到任何伙伴
+  </div>
 </template>
 
 <style scoped>
