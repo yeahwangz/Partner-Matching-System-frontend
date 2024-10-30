@@ -50,7 +50,7 @@ onMounted(async () => {
     </van-card>
   </div>
   <div v-else>
-    匹配不到任何伙伴
+    <van-empty  image="search" description="匹配不到任何伙伴" />
   </div>
 </template>
 

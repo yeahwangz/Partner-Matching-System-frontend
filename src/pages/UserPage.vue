@@ -9,7 +9,6 @@ const user = {
   gender: '男',
   phone: '123112312',
   email: '12345@qq.com',
-  planetCode: '1234',
   createTime: new Date(),
 }
 const router = useRouter()
@@ -37,7 +36,6 @@ const toEdit = (editKey: string | string[], editName: string | string[] ,current
   <van-cell title="电话" is-link />
   <van-cell title="邮箱" is-link />
   <van-cell title="角色" is-link />
-  <van-cell title="星球编号" is-link />
   <van-cell title="标签" is-link />
   <van-cell title="账号创建时间" is-link />
 
