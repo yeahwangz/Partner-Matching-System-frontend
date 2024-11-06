@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import {useRoute} from "vue-router";
+import {getUserInfoService} from "../services/UserInfoService.ts";
+import {getCurrentUserInfo, setCurrentUserInfo} from "../classes/UserInfoClass.ts";
+import myAxios from "../config/AxiosConfig.ts";
+import {UserType} from "../models/UserType";
 
 const route = useRoute();
 const editContent = ref({
@@ -8,10 +12,20 @@ const editContent = ref({
   editName: route.query.editName as string | '',
   currentValue: route.query.currentValue as string | '',
 })
-const onSubmit = (values: any) => {
-  //TODO 将editKey、editName、currentValue提交到后台
-  console.log('submit',values);
+const onSubmit = async () => {
+  await getUserInfoService()
+  const nowUserInfo: UserType = getCurrentUserInfo()
+  const res = await myAxios.post('/user/edit/userInfo',{
+    id: nowUserInfo.id,
+    [editContent.value.editKey]: editContent.value.currentValue,
+  })
+  console.log("前后端均修改成功",res)
+  if (res.data.data && res.data.code === 0){
+    setCurrentUserInfo(res.data.data)
+    editContent.value.currentValue = res.data.data[editContent.value.editKey]
+  }
 };
+
 </script>
 
 <template>

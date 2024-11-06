@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import { Button, NavBar, Icon, Tabbar, TabbarItem} from 'vant';
+import {Button, NavBar, Icon, Tabbar, TabbarItem, Toast} from 'vant';
 import * as VueRouter from 'vue-router';
 import routes from "./config/route.ts";
 import myAxios from "./config/AxiosConfig.ts";
@@ -12,6 +12,7 @@ app.use(Icon);
 app.use(Tabbar);
 app.use(TabbarItem);
 app.use(myAxios);
+app.use(Toast);
 
 const router = VueRouter.createRouter({
     history: VueRouter.createWebHashHistory(),
