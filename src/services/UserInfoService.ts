@@ -7,9 +7,7 @@ export const getUserInfoService = async ()=> {
         return getCurrentUserInfo()
     }
     try {
-        console.log('对的')
         const nowCurrentUserInfoFromAxios = await myAxios.get('/user/search/userInfo')
-        console.log('在这：',nowCurrentUserInfoFromAxios)
         const nowCurrentUserInfo: UserType = nowCurrentUserInfoFromAxios.data.data
         setCurrentUserInfo(nowCurrentUserInfo)
         return nowCurrentUserInfo
