@@ -15,16 +15,18 @@ const editContent = ref({
 })
 const onSubmit = async () => {
   await getUserInfoService()
-  const nowUserInfo: UserType = getCurrentUserInfo()
-  const res = await myAxios.post('/user/edit/userInfo',{
-    id: nowUserInfo.id,
-    [editContent.value.editKey]: editContent.value.currentValue,
-  })
-  console.log("前后端均修改成功",res)
-  if (res.data.data && res.data.code === 0){
-    setCurrentUserInfo(res.data.data)
-    editContent.value.currentValue = res.data.data[editContent.value.editKey]
-    await router.replace('/user')
+  const nowUserInfo: UserType | undefined = getCurrentUserInfo()
+  if (nowUserInfo){
+    const res = await myAxios.post('/user/edit/userInfo',{
+      id: nowUserInfo.id,
+      [editContent.value.editKey]: editContent.value.currentValue,
+    })
+    console.log("前后端均修改成功",res)
+    if (res.data.data && res.data.code === 0){
+      setCurrentUserInfo(res.data.data)
+      editContent.value.currentValue = res.data.data[editContent.value.editKey]
+      await router.replace('/user')
+    }
   }
 };
 
@@ -38,7 +40,9 @@ const afterRead = (file: any) => {
   }).then(response => {
     const nowAvatarUrl = response.data.data
     const userInfo = getCurrentUserInfo()
-    userInfo.avatarUrl=nowAvatarUrl
+    if (userInfo){
+      userInfo.avatarUrl=nowAvatarUrl
+    }
   }).catch(error => {
     console.log('更新用户头像失败',error)
   })

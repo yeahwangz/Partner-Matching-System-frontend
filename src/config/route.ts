@@ -6,6 +6,8 @@ import UserEditPage from "../pages/UserEditPage.vue";
 import SearchResultPage from "../pages/SearchResultPage.vue";
 import UserLoginPage from "../pages/UserLoginPage.vue";
 import UserRegisterPage from "../pages/UserRegisterPage.vue";
+import UserInfoPage from "../pages/UserInfoPage.vue";
+import TeamInfoPage from "../pages/TeamInfoPage.vue";
 
 
 const routes = [
@@ -17,6 +19,8 @@ const routes = [
     { path: '/search/result', component: SearchResultPage, meta: { keepAlive: false }  },
     { path: '/login', component: UserLoginPage, meta: { keepAlive: false }  },
     { path: '/register', component: UserRegisterPage, meta: { keepAlive: false }  },
+    { path: '/userInfo', component: UserInfoPage, meta: { keepAlive: false }  },
+    { path: '/teamInfo', component: TeamInfoPage, meta: { keepAlive: false }  },
 ]
 
 export default routes;

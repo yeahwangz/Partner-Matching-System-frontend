@@ -2,6 +2,8 @@
 import {onMounted, ref} from "vue";
 import myAxios from "../config/AxiosConfig.ts";
 import {UserToRecommendType} from "../models/UserToRecommendType";
+import {useRouter} from "vue-router";
+import {Toast} from "vant";
 
 const checked = ref(false);
 const switchLoad = ref(0)
@@ -59,6 +61,16 @@ onMounted(async () => {
   })
   UserToRecommendList.value = normalUserOnePage.data.data
 })
+
+const router = useRouter()
+const clickFooter = (UserToRecommend: UserToRecommendType) => {
+  router.push({
+    path: '/userInfo',
+    query: {
+      RouterUserToRecommend: JSON.stringify(UserToRecommend)
+    }
+  })
+}
 </script>
 
 <template>
@@ -69,7 +81,12 @@ onMounted(async () => {
 
     <van-pagination v-if="checked === false" v-model="currentPage" @change="getNormalUserOnePage"
                     :page-count="pageNum" mode="simple" />
-
+    <div v-if="switchLoad === 0 && UserToRecommendList.length === 0">
+      <van-empty description="无匹配的普通用户" />
+    </div>
+    <div v-if="switchLoad === 1 && UserToRecommendList.length === 0">
+      <van-empty description="无匹配的心动用户" />
+    </div>
     <div>
       <van-card
           v-for="UserToRecommend in UserToRecommendList"
@@ -85,6 +102,9 @@ onMounted(async () => {
                    style="margin-right: 8px; margin-top: 8px">
             {{ tag }}
           </van-tag>
+        </template>
+        <template #footer>
+          <van-button size="small" @click="clickFooter(UserToRecommend)">查看详情</van-button>
         </template>
       </van-card>
     </div>
