@@ -55,9 +55,9 @@ const exitTheTeam = (myTeamWithLeader: TeamToRecommendType) => {
     message:
         '请确定是否退出该队伍',
   })
-      .then(async () => {
+      .then(() => {
         // on confirm
-        await myAxios.get('/user/leaderExitTeam',{
+        myAxios.get('/user/leaderExitTeam',{
           params: {
             teamId: myTeamWithLeader.id
           }
@@ -69,8 +69,23 @@ const exitTheTeam = (myTeamWithLeader: TeamToRecommendType) => {
       })
 }
 
-const changeTheTeamLeader = (myTeamWithLeader: TeamToRecommendType) => {
+/*const changeTheTeamLeader = (myTeamWithLeader: TeamToRecommendType) => {}*/
 
+const deleteTheTeam = (myTeamWithLeader: TeamToRecommendType) => {
+  Dialog.confirm({
+    title: '解散队伍',
+    message:
+        '请确定是否解散该队伍',
+  })
+      .then(() => {
+        myAxios.get('/user/deleteTeam',{
+          params: {
+            teamId: myTeamWithLeader.id
+          }
+        })
+        history.go(0)
+      })
+      .catch(() => {})
 }
 </script>
 
@@ -96,10 +111,9 @@ const changeTheTeamLeader = (myTeamWithLeader: TeamToRecommendType) => {
       </template>
       <template #footer>
         <van-button size="small" @click="exitTheTeam(myTeamWithLeader)">退出队伍</van-button>
-<!--        -->
-        <van-button size="small" @click="changeTheTeamLeader(myTeamWithLeader)">转让队长</van-button>
-        <!--    <van-button size="small" @click="deleteTheTeam(myTeamWithLeader)">解散队伍</van-button>
-        <van-button size="small" @click="alterTheTeam(myTeamWithLeader)">修改队伍</van-button>-->
+<!--        <van-button size="small" @click="changeTheTeamLeader(myTeamWithLeader)">转让队长</van-button>-->
+        <van-button size="small" @click="deleteTheTeam(myTeamWithLeader)">解散队伍</van-button>
+        <!--   <van-button size="small" @click="alterTheTeam(myTeamWithLeader)">修改队伍</van-button>-->
       </template>
 
     </van-card>
