@@ -8,6 +8,9 @@ import UserLoginPage from "../pages/UserLoginPage.vue";
 import UserRegisterPage from "../pages/UserRegisterPage.vue";
 import UserInfoPage from "../pages/UserInfoPage.vue";
 import TeamInfoPage from "../pages/TeamInfoPage.vue";
+import CreateTeamPage from "../pages/CreateTeamPage.vue";
+import MyTeamWithLeaderPage from "../pages/MyTeamWithLeaderPage.vue";
+import MyTeamWithMemberPage from "../pages/MyTeamWithMemberPage.vue";
 
 
 const routes = [
@@ -21,6 +24,9 @@ const routes = [
     { path: '/register', component: UserRegisterPage, meta: { keepAlive: false }  },
     { path: '/userInfo', component: UserInfoPage, meta: { keepAlive: false }  },
     { path: '/teamInfo', component: TeamInfoPage, meta: { keepAlive: false }  },
+    { path: '/createTeam', component: CreateTeamPage, meta: { keepAlive: false }  },
+    { path: '/myTeamWithLeaderPage', component: MyTeamWithLeaderPage, meta: { keepAlive: false }  },
+    { path: '/myTeamWithMemberPage', component: MyTeamWithMemberPage, meta: { keepAlive: false }  },
 ]
 
 export default routes;

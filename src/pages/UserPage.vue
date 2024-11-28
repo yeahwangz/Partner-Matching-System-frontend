@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import {useRouter} from "vue-router";
 import {currentUserInfo} from "../classes/UserInfoClass.ts";
-import {onBeforeMount} from "vue";
 import {getUserInfoService} from "../services/UserInfoService.ts";
+import {onBeforeMount} from "vue";
 
 onBeforeMount(() => {
   if (currentUserInfo === undefined){

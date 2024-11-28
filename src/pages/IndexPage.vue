@@ -3,7 +3,6 @@ import {onMounted, ref} from "vue";
 import myAxios from "../config/AxiosConfig.ts";
 import {UserToRecommendType} from "../models/UserToRecommendType";
 import {useRouter} from "vue-router";
-import {Toast} from "vant";
 
 const checked = ref(false);
 const switchLoad = ref(0)
