@@ -3,6 +3,8 @@ import {useRouter} from "vue-router";
 import {currentUserInfo} from "../classes/UserInfoClass.ts";
 import {getUserInfoService} from "../services/UserInfoService.ts";
 import {onBeforeMount} from "vue";
+import myAxios from "../config/AxiosConfig.ts";
+import {setLoginStatus} from "../globals/LoginStatus.ts";
 
 onBeforeMount(() => {
   if (currentUserInfo === undefined){
@@ -20,6 +22,12 @@ const toEdit = (editKey: string | string[], editName: string | string[] ,current
       currentValue,
     }
   })
+}
+
+const userLogout = () => {
+  myAxios.get('/user/logout')
+  setLoginStatus(0)
+  router.replace('/login')
 }
 </script>
 
@@ -42,9 +50,10 @@ const toEdit = (editKey: string | string[], editName: string | string[] ,current
     <van-cell title="标签" is-link :value="currentUserInfo.tags" @click="toEdit('tags', '标签' , currentUserInfo.tags)"/>
     <van-cell title="账号创建时间" :value="currentUserInfo.createTime.toString()" />
     <van-cell title="个人简介" is-link :value="currentUserInfo.profile" @click="toEdit('profile', '个人简介' , currentUserInfo.profile)"/>
-
   </div>
-
+  <div>
+    <van-button type="primary" @click="userLogout">退出登录</van-button>
+  </div>
 </template>
 
 <style scoped>

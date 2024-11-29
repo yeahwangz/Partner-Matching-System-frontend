@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { useRouter } from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 
 const router = useRouter();
 const onClickLeft = () => router.back();
 const onClickRight = () => router.push('/search');
-
+const route = useRoute()
 </script>
 
 <template>
   <van-nav-bar
-      :title="$route.meta.title as string"
+      :title="route.meta.title as string"
       left-arrow
       @click-left="onClickLeft"
       @click-right="onClickRight"
