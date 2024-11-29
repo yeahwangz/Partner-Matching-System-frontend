@@ -87,6 +87,8 @@ const deleteTheTeam = (myTeamWithLeader: TeamToRecommendType) => {
       })
       .catch(() => {})
 }
+
+/*const alterTheTeam = (myTeamWithLeader: TeamToRecommendType) => {}*/
 </script>
 
 <template>
@@ -113,9 +115,8 @@ const deleteTheTeam = (myTeamWithLeader: TeamToRecommendType) => {
         <van-button size="small" @click="exitTheTeam(myTeamWithLeader)">退出队伍</van-button>
 <!--        <van-button size="small" @click="changeTheTeamLeader(myTeamWithLeader)">转让队长</van-button>-->
         <van-button size="small" @click="deleteTheTeam(myTeamWithLeader)">解散队伍</van-button>
-        <!--   <van-button size="small" @click="alterTheTeam(myTeamWithLeader)">修改队伍</van-button>-->
+<!--        <van-button size="small" @click="alterTheTeam(myTeamWithLeader)">修改队伍</van-button>-->
       </template>
-
     </van-card>
   </div>
 </template>
