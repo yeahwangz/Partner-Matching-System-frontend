@@ -4,6 +4,7 @@ import {useRouter} from "vue-router";
 import myAxios from "../config/AxiosConfig.ts";
 import {Toast} from "vant";
 import {setCurrentUserInfo} from "../classes/UserInfoClass.ts";
+import {setLoginStatus} from "../globals/LoginStatus.ts";
 
 const userAccount = ref('');
 const userPassword = ref('');
@@ -16,6 +17,7 @@ const onSubmit = async () => {
     })
     if( res.data.data && res.data.code === 0){
       setCurrentUserInfo(res.data.data)
+      setLoginStatus(1)
       await router.replace('/')
     }else{
       Toast('登录失败')
@@ -26,7 +28,8 @@ const onSubmit = async () => {
   }
 };
 const onRegister = () => {
-  router.replace('/register')
+  setLoginStatus(2)
+  router.push('/register')
 }
 </script>
 

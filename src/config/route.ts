@@ -14,19 +14,19 @@ import MyTeamWithMemberPage from "../pages/MyTeamWithMemberPage.vue";
 
 
 const routes = [
-    { path: '/', component: IndexPage , meta: { keepAlive: false } },
-    { path: '/team', component: TeamPage, meta: { keepAlive: false }  },
-    { path: '/user', component: UserPage , meta: { keepAlive: false } },
-    { path: '/search', component: SearchPage , meta: { keepAlive: false } },
-    { path: '/user/edit', component: UserEditPage , meta: { keepAlive: false } },
-    { path: '/search/result', component: SearchResultPage, meta: { keepAlive: false }  },
-    { path: '/login', component: UserLoginPage, meta: { keepAlive: false }  },
-    { path: '/register', component: UserRegisterPage, meta: { keepAlive: false }  },
-    { path: '/userInfo', component: UserInfoPage, meta: { keepAlive: false }  },
-    { path: '/teamInfo', component: TeamInfoPage, meta: { keepAlive: false }  },
-    { path: '/createTeam', component: CreateTeamPage, meta: { keepAlive: false }  },
-    { path: '/myTeamWithLeaderPage', component: MyTeamWithLeaderPage, meta: { keepAlive: false }  },
-    { path: '/myTeamWithMemberPage', component: MyTeamWithMemberPage, meta: { keepAlive: false }  },
+    { path: '/', component: IndexPage , meta: { keepAlive: false ,title: "首页" } },
+    { path: '/team', component: TeamPage, meta: { keepAlive: false ,title: "队伍页" }  },
+    { path: '/user', component: UserPage , meta: { keepAlive: false ,title: "用户页"} },
+    { path: '/search', component: SearchPage , meta: { keepAlive: false ,title: "用户搜索"} },
+    { path: '/user/edit', component: UserEditPage , meta: { keepAlive: false ,title: "用户信息编辑"} },
+    { path: '/search/result', component: SearchResultPage, meta: { keepAlive: false ,title: "用户搜索结果"}  },
+    { path: '/login', component: UserLoginPage, meta: { keepAlive: false ,title: "登录"}  },
+    { path: '/register', component: UserRegisterPage, meta: { keepAlive: false ,title: "注册"}  },
+    { path: '/userInfo', component: UserInfoPage, meta: { keepAlive: false ,title: "用户信息"}  },
+    { path: '/teamInfo', component: TeamInfoPage, meta: { keepAlive: false ,title: "队伍信息"}  },
+    { path: '/createTeam', component: CreateTeamPage, meta: { keepAlive: false ,title: "创建队伍"}  },
+    { path: '/myTeamWithLeaderPage', component: MyTeamWithLeaderPage, meta: { keepAlive: false ,title: "作为队长的队伍"}  },
+    { path: '/myTeamWithMemberPage', component: MyTeamWithMemberPage, meta: { keepAlive: false ,title: "作为普通成员的队伍"}  },
 ]
 
 export default routes;

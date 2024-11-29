@@ -9,7 +9,7 @@ const onClickRight = () => router.push('/search');
 
 <template>
   <van-nav-bar
-      title="标题"
+      :title="$route.meta.title as string"
       left-arrow
       @click-left="onClickLeft"
       @click-right="onClickRight"

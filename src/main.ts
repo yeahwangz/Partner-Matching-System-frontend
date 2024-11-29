@@ -1,19 +1,19 @@
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 import App from './App.vue'
 import {
     Button,
-    NavBar,
-    Icon,
-    Tabbar,
-    TabbarItem,
-    Toast,
-    Pagination,
-    Empty,
-    CellGroup,
     Cell,
+    CellGroup,
+    Dialog,
+    Empty,
     Field,
     Form,
-    Dialog
+    Icon,
+    NavBar,
+    Pagination,
+    Tabbar,
+    TabbarItem,
+    Toast
 } from 'vant';
 import * as VueRouter from 'vue-router';
 import routes from "./config/route.ts";
@@ -25,7 +25,6 @@ app.use(NavBar);
 app.use(Icon);
 app.use(Tabbar);
 app.use(TabbarItem);
-app.use(myAxios);
 app.use(Toast);
 app.use(Pagination);
 app.use(Empty);
@@ -33,8 +32,8 @@ app.use(Cell);
 app.use(CellGroup);
 app.use(Form);
 app.use(Field);
-app.use(CellGroup);
 app.use(Dialog);
+app.use(myAxios)
 
 const router = VueRouter.createRouter({
     history: VueRouter.createWebHashHistory(),
@@ -44,6 +43,7 @@ const router = VueRouter.createRouter({
 app.use(router);
 
 app.mount('#app');
+
 
 
 
